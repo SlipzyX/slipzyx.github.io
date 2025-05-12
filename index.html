@@ -94,12 +94,23 @@
     Your browser does not support the video tag.
   </video>
 
-  <audio id="audio" loop muted>
+  <audio id="audio" autoplay loop muted>
     <source src="audio.mp3" type="audio/mp3">
     Your browser does not support the audio tag.
   </audio>
 
-  <!-- Removed this script block as it uses undeclared variables -->
+  <script>
+    // Handle video loading errors
+    const backgroundVideo = document.getElementById('background-video');
+    video.addEventListener('error', () => {
+      console.error('Error loading video. Please check the video source.');
+    });
+
+    // Handle audio loading errors
+    audioElement.addEventListener('error', () => {
+      console.error('Error loading audio. Please check the audio source.');
+    });
+  </script>
 
   <button id="enter-button">Click Me ^_^</button>
 
@@ -111,7 +122,7 @@
     const enterButton = document.getElementById('enter-button');
     const blurBackground = document.getElementById('blur-background');
     const video = document.getElementById('background-video');
-    const audio = document.getElementById('audio');
+    const audioElement = document.getElementById('audio');
     const volumeSlider = document.getElementById('volume-slider');
     const redirectButton = document.getElementById('redirect-button');
     const redirectUrl = "https://guns.lol/slipzy"; 
@@ -120,33 +131,22 @@
     enterButton.addEventListener('click', () => {
       // Play the video and audio
       video.style.display = 'block'; // Show the video
-      audio.style.display = 'block'; // Show the audio
-      audio.play();
+      audioElement.style.display = 'block'; // Show the audio
+      audioElement.play();
       video.play();
 
       // Remove blur background and hide the button
       blurBackground.style.display = 'none';
       enterButton.style.display = 'none';
 
-    // Handle video loading errors
-    video.addEventListener('error', () => {
-      console.error('Error loading video. Please check the video source.');
-    });
-
-    // Handle audio loading errors
-    audio.addEventListener('error', () => {
-      console.error('Error loading audio. Please check the audio source.');
-    });
-
-      // Start video and audio when "Enter" button is clicked
-      enterButton.addEventListener('click', () => {
-        redirectButton.style.display = 'block';
-      });
+      // Show the redirect button and volume slider
+      volumeSlider.style.display = 'block';
+      redirectButton.style.display = 'block';
     });
 
     // Update the volume based on the slider
     volumeSlider.addEventListener('input', (e) => {
-      audio.volume = e.target.value;
+      audioElement.volume = e.target.value;
     });
 
     // Redirect to the URL when the redirect button is clicked
