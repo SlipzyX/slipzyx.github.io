@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>slipzy</title>
+    <title>Slipzy</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
             overflow: hidden;
-            font-family: Arial, sans-serif;
         }
-        .video-background {
-            position: fixed;
+
+        #background-video {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -20,59 +21,84 @@
             object-fit: cover;
             z-index: -1;
         }
-        .controls {
+
+        #audio {
+            display: none;
+        }
+
+        #enter-button {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 1;
-            display: flex;
-            gap: 10px;
-        }
-        .play-button, .volume-slider, .redirect-button {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .volume-slider {
-            width: 100px;
-        }
-        .redirect-button {
-            position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        #enter-button:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        #blur-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            z-index: 0;
+        }
+
+        #volume-slider {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
         }
     </style>
 </head>
 <body>
-    <video class="video-background" autoplay loop muted playsinline>
+
+    <div id="blur-background"></div>
+
+    <video id="background-video" autoplay loop muted>
         <source src="background.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <audio id="background-audio" loop>
-        <source src="audio.mp3" type="audio/mpeg">
+
+    <audio id="audio" loop>
+        <source src="audio.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
-    <div class="controls">
-        <button class="play-button" onclick="playAudio()">Play Audio</button>
-        <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1" oninput="setVolume(this.value)">
-    </div>
-    <button class="redirect-button" onclick="redirectToPage()">guns.lol</button>
+
+    <button id="enter-button">Enter</button>
+
+    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+
     <script>
-        function playAudio() {
-            const audio = document.getElementById('background-audio');
+        const enterButton = document.getElementById('enter-button');
+        const blurBackground = document.getElementById('blur-background');
+        const audio = document.getElementById('audio');
+        const volumeSlider = document.getElementById('volume-slider');
+
+        // Play the audio and remove blur when the "Enter" button is clicked
+        enterButton.addEventListener('click', () => {
             audio.play();
-        }
-        function setVolume(value) {
-            const audio = document.getElementById('background-audio');
-            audio.volume = value;
-        }
-        function redirectToPage() {
-            window.location.href = 'https://guns.lol/slipzy';
-        }
+            blurBackground.style.display = 'none';
+            enterButton.style.display = 'none';
+        });
+
+        // Update the volume based on the slider
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
     </script>
+
 </body>
 </html>
