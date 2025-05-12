@@ -59,12 +59,19 @@
 
         #volume-slider {
             position: absolute;
-            bottom: 80px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
             width: 200px;
             z-index: 1;
         }
+        #redirect-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    
     </style>
 </head>
 <body>
@@ -91,6 +98,8 @@
         const video = document.getElementById('background-video');
         const audio = document.getElementById('audio');
         const volumeSlider = document.getElementById('volume-slider');
+        const redirectButton = document.getElementById('redirect-button');
+        const redirectUrl = "https://guns.lol/slipzy"; 
 
         // Start video and audio when "Enter" button is clicked
         enterButton.addEventListener('click', () => {
