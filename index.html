@@ -20,21 +20,22 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            display: none; /* Initially hidden */
         }
 
         #audio {
-            display: none;
+            display: none; /* Initially hidden */
         }
 
         #enter-button {
             position: absolute;
-            bottom: 20px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            padding: 10px 20px;
+            transform: translate(-50%, -50%);
+            padding: 20px 40px;
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
-            font-size: 18px;
+            font-size: 24px;
             border: none;
             cursor: pointer;
             z-index: 1;
@@ -60,6 +61,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 200px;
+            z-index: 1;
         }
     </style>
 </head>
@@ -84,12 +86,19 @@
     <script>
         const enterButton = document.getElementById('enter-button');
         const blurBackground = document.getElementById('blur-background');
+        const video = document.getElementById('background-video');
         const audio = document.getElementById('audio');
         const volumeSlider = document.getElementById('volume-slider');
 
-        // Play the audio and remove blur when the "Enter" button is clicked
+        // Start video and audio when "Enter" button is clicked
         enterButton.addEventListener('click', () => {
+            // Play the video and audio
+            video.style.display = 'block'; // Show the video
+            audio.style.display = 'block'; // Show the audio
             audio.play();
+            video.play();
+
+            // Remove blur background and hide the button
             blurBackground.style.display = 'none';
             enterButton.style.display = 'none';
         });
