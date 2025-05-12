@@ -64,6 +64,7 @@
       transform: translateX(-50%);
       width: 200px;
       z-index: 1;
+      display: none; /* Initially hidden */
     }
     #redirect-button {
       position: fixed;
@@ -77,6 +78,7 @@
       border: none;
       cursor: pointer;
       z-index: 1;
+      display: none; /* Initially hidden */
     }
     #redirect-button:hover {
       background-color: rgba(0, 0, 0, 0.9);
@@ -87,21 +89,21 @@
 
   <div id="blur-background"></div>
 
-  <video id="background-video" autoplay loop muted>
+  <video id="background-video" autoplay loop muted></video>
     <source src="background.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
-  <audio id="audio" loop>
+  <audio id="audio" loop muted>
     <source src="audio.mp3" type="audio/mp3">
     Your browser does not support the audio tag.
   </audio>
 
-  <button id="enter-button">Enter</button>
+  <button id="enter-button">Click Me ^_^</button>
 
   <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
 
-  <button id="redirect-button">Redirect</button>
+  <button id="redirect-button">guns.lol</button>
 
   <script>
     const enterButton = document.getElementById('enter-button');
@@ -123,6 +125,10 @@
       // Remove blur background and hide the button
       blurBackground.style.display = 'none';
       enterButton.style.display = 'none';
+
+      // Show the redirect button and volume slider
+      volumeSlider.style.display = 'block';
+      redirectButton.style.display = 'block';
     });
 
     // Update the volume based on the slider
