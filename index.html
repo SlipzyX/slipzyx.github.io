@@ -99,19 +99,7 @@
     Your browser does not support the audio tag.
   </audio>
 
-  <script>
-    // Handle video loading errors
-    // Reuse the already declared 'video' variable from the first script block
-    video.addEventListener('error', () => {
-      console.error('Error loading video. Please check the video source.');
-    });
-
-    // Handle audio loading errors
-    // Use the already declared 'audio' variable from the first script block
-    audio.addEventListener('error', () => {
-      console.error('Error loading audio. Please check the audio source.');
-    });
-  </script>
+  <!-- Removed this script block as it uses undeclared variables -->
 
   <button id="enter-button">Click Me ^_^</button>
 
@@ -140,9 +128,20 @@
       blurBackground.style.display = 'none';
       enterButton.style.display = 'none';
 
-      // Show the redirect button and volume slider
-      volumeSlider.style.display = 'block';
-      redirectButton.style.display = 'block';
+    // Handle video loading errors
+    video.addEventListener('error', () => {
+      console.error('Error loading video. Please check the video source.');
+    });
+
+    // Handle audio loading errors
+    audio.addEventListener('error', () => {
+      console.error('Error loading audio. Please check the audio source.');
+    });
+
+      // Start video and audio when "Enter" button is clicked
+      enterButton.addEventListener('click', () => {
+        redirectButton.style.display = 'block';
+      });
     });
 
     // Update the volume based on the slider
