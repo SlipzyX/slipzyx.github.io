@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slipzy</title>
+    <title>Slipzy's Shit</title>
     <style>
         body, html {
             margin: 0;
@@ -20,27 +20,35 @@
             object-fit: cover;
             z-index: -1;
         }
-        .content {
-            position: relative;
-            z-index: 1;
+        .play-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
             color: white;
-            text-align: center;
-            padding: 50px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <video class="video-background" autoplay loop muted="false" playsinline>
+    <video class="video-background" autoplay loop muted playsinline>
         <source src="background.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <audio autoplay loop>
+    <audio id="background-audio" loop>
         <source src="audio.mp3" type="audio/mpeg">
         Your browser does not support the audio tag.
     </audio>
-    <div class="content">
-        <h1>Slipzy's Shit</h1>
-        <p>meow</p>
-    </div>
+    <button class="play-button" onclick="playAudio()">Play Audio</button>
+    <script>
+        function playAudio() {
+            const audio = document.getElementById('background-audio');
+            audio.play();
+        }
+    </script>
 </body>
 </html>
