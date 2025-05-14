@@ -94,10 +94,10 @@
 
         button.addEventListener('click', () => {
             overlay.style.display = 'none';
+            setTimeout(() => {
             video.play();
-            // setTimeout(() => {
             audio.play();
-            // }, 300);
+            }, 500);
         });
 
         volumeSlider.addEventListener('input', (event) => {
