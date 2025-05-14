@@ -47,6 +47,16 @@
             border-radius: 10px;
             cursor: pointer;
         }
+
+        #volume-slider {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
     </style>
 </head>
 <body>
@@ -55,16 +65,24 @@
     </div>
     <video id="background-video" src="background.mp4" muted loop></video>
     <audio id="background-audio" src="audio.mp3" loop></audio>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
     <script>
         const video = document.getElementById('background-video');
         const audio = document.getElementById('background-audio');
         const overlay = document.getElementById('overlay');
         const button = document.getElementById('enter-btn');
+        const volumeSlider = document.getElementById('volume-slider');
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
         button.addEventListener('click', () => {
             overlay.style.display = 'none';
             video.play();
             audio.play();
+        });
+
+        volumeSlider.addEventListener('input', (event) => {
+            audio.volume = volumeSlider.value;
+            video.volume = volumeSlider.value;
         });
 
         video.pause();
