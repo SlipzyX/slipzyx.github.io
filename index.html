@@ -57,6 +57,19 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        #redirect-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -73,6 +86,13 @@
         const button = document.getElementById('enter-btn');
         const volumeSlider = document.getElementById('volume-slider');
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const redirectButton = document.createElement('button');
+        redirectButton.id = 'redirect-btn';
+        redirectButton.innerText = 'my guns.lol';
+        document.body.appendChild(redirectButton);
+        redirectButton.addEventListener('click', () => {
+            window.location.href = 'guns.lol/slipzy'; 
+        });
 
         button.addEventListener('click', () => {
             overlay.style.display = 'none';
