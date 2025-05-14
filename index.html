@@ -1,159 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>slipzy</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slipzy</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
 
-    #background-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      display: none; /* Initially hidden */
-    }
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
 
-    #audio {
-      display: none; /* Initially hidden */
-    }
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.5);
+        }
 
-    #enter-button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 20px 40px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      font-size: 24px;
-      border: none;
-      cursor: pointer;
-      z-index: 1;
-    }
-
-    #enter-button:hover {
-      background-color: rgba(0, 0, 0, 0.9);
-    }
-
-    #blur-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: black; /* Set initial background color to black */
-      backdrop-filter: blur(10px);
-      z-index: 0;
-      transition: background-color 0.3s ease; /* Smooth transition for background color change */
-    }
-
-    #volume-slider {
-      position: absolute;
-      top: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      z-index: 1;
-      display: none; /* Initially hidden */
-    }
-    #redirect-button {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 10px 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      font-size: 18px;
-      border: none;
-      cursor: pointer;
-      z-index: 1;
-      display: none; /* Initially hidden */
-    }
-    #redirect-button:hover {
-      background-color: rgba(0, 0, 0, 0.9);
-    }
-  </style>
+        #enter-btn {
+            padding: 20px 40px;
+            font-size: 24px;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <div id="overlay">
+        <button id="enter-btn">Click to Enter</button>
+    </div>
+    <video id="background-video" src="background.mp4" muted loop></video>
+    <audio id="background-audio" src="audio.mp3" loop></audio>
+    <script>
+        const video = document.getElementById('background-video');
+        const audio = document.getElementById('background-audio');
+        const overlay = document.getElementById('overlay');
+        const button = document.getElementById('enter-btn');
 
-  <div id="blur-background"></div>
+        button.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            video.play();
+            audio.play();
+        });
 
-  <video id="background-video" autoplay loop muted>
-    <source src="background.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-
-  <audio id="audio" autoplay loop muted>
-    <source src="audio.mp3" type="audio/mp3">
-    Your browser does not support the audio tag.
-  </audio>
-
-  <script>
-    // Handle video loading errors
-    const backgroundVideo = document.getElementById('background-video');
-    video.addEventListener('error', () => {
-      console.error('Error loading video. Please check the video source.');
-    });
-
-    // Handle audio loading errors
-    audioElement.addEventListener('error', () => {
-      console.error('Error loading audio. Please check the audio source.');
-    });
-  </script>
-
-  <button id="enter-button">Click Me ^_^</button>
-
-  <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
-
-  <button id="redirect-button">guns.lol</button>
-
-  <script>
-    const enterButton = document.getElementById('enter-button');
-    const blurBackground = document.getElementById('blur-background');
-    const video = document.getElementById('background-video');
-    const audioElement = document.getElementById('audio');
-    const volumeSlider = document.getElementById('volume-slider');
-    const redirectButton = document.getElementById('redirect-button');
-    const redirectUrl = "https://guns.lol/slipzy"; 
-
-    // Start video and audio when "Enter" button is clicked
-    enterButton.addEventListener('click', () => {
-      // Play the video and audio
-      video.style.display = 'block'; // Show the video
-      audioElement.style.display = 'block'; // Show the audio
-      audioElement.play();
-      video.play();
-
-      // Remove blur background and hide the button
-      blurBackground.style.display = 'none';
-      enterButton.style.display = 'none';
-
-      // Show the redirect button and volume slider
-      volumeSlider.style.display = 'block';
-      redirectButton.style.display = 'block';
-    });
-
-    // Update the volume based on the slider
-    volumeSlider.addEventListener('input', (e) => {
-      audioElement.volume = e.target.value;
-    });
-
-    // Redirect to the URL when the redirect button is clicked
-    redirectButton.addEventListener('click', () => {
-      window.location.href = redirectUrl;
-    });
-  </script>
-
+        video.pause();
+        audio.pause();
+    </script>
 </body>
 </html>
