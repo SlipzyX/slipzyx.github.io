@@ -97,7 +97,9 @@
         button.addEventListener('click', () => {
             overlay.style.display = 'none';
             video.play();
-            audio.play();
+            setTimeout(() => {
+                audio.play();
+            }, 2000); // Delay audio by 2 seconds
         });
 
         volumeSlider.addEventListener('input', (event) => {
