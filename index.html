@@ -94,7 +94,7 @@
     <video id="background-video" src="background.mp4" muted loop></video>
     <audio id="background-audio" src="audio.mp3" loop></audio>
     <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
-    <button id="pause-btn">Pause/Play</button>
+    <button id="pause-btn">||</button>
     <script>
         const video = document.getElementById('background-video');
         const audio = document.getElementById('background-audio');
@@ -116,11 +116,11 @@
             if (video.paused) {
                 video.play();
                 audio.play();
-                pauseButton.innerText = 'Pause';
+                pauseButton.innerText = '||';
             } else {
                 video.pause();
                 audio.pause();
-                pauseButton.innerText = 'Play';
+                pauseButton.innerText = '▷';
             }
         });
 
