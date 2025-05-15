@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>slipzy</title>
+    <title>Slipzy</title>
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <meta name="description" content="slipzy">
+    <meta name="keywords" content="slipzy, slipzy.xyz, slipzy guns, slipzy guns.lol">
+    <meta name="author" content="slipzy">
     <style>
         body, html {
             margin: 0;
@@ -101,6 +105,7 @@
         const overlay = document.getElementById('overlay');
         const button = document.getElementById('enter-btn');
         const volumeSlider = document.getElementById('volume-slider');
+        const pauseButton = document.getElementById('pause-btn');
         const redirectButton = document.createElement('button');
         redirectButton.id = 'redirect-btn';
         redirectButton.innerText = 'my guns.lol';
@@ -108,7 +113,6 @@
         redirectButton.addEventListener('click', () => {
             window.open('https://guns.lol/slipzy', '_blank'); 
         });
-        const pauseButton = document.getElementById('pause-btn');
         
         
         
