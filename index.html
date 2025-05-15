@@ -52,7 +52,21 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px;
+            border-radius: 10px;
             background: rgba(255, 255, 255, 0.2);
+        }
+
+        #pause-btn {
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
         }
 
         #redirect-btn {
@@ -73,6 +87,7 @@
 <body>
     <div id="overlay">
         <button id="enter-btn">Click Me ^_^</button>
+        <button id="pause-btn">Pause/Play</button>
     </div>
     <video id="background-video" src="background.mp4" muted loop></video>
     <audio id="background-audio" src="audio.mp3" loop></audio>
@@ -85,6 +100,19 @@
         const volumeSlider = document.getElementById('volume-slider');
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const redirectButton = document.createElement('button');
+        const pauseButton = document.getElementById('pause-btn');
+        pauseBtn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                audio.play();
+                pauseButton.innerText = 'Pause';
+            } else {
+                video.pause();
+                audio.pause();
+                pauseButton.innerText = 'Play';
+            }
+        });
+        
         redirectButton.id = 'redirect-btn';
         redirectButton.innerText = 'my guns.lol';
         document.body.appendChild(redirectButton);
