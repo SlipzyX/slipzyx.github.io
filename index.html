@@ -101,10 +101,18 @@
         const overlay = document.getElementById('overlay');
         const button = document.getElementById('enter-btn');
         const volumeSlider = document.getElementById('volume-slider');
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const redirectButton = document.createElement('button');
+        redirectButton.id = 'redirect-btn';
+        redirectButton.innerText = 'my guns.lol';
+        document.body.appendChild(redirectButton);
+        redirectButton.addEventListener('click', () => {
+            window.open('https://guns.lol/slipzy', '_blank'); 
+        });
         const pauseButton = document.getElementById('pause-btn');
-        pauseBtn.addEventListener('click', () => {
+        
+        
+        
+        pauseButton.addEventListener('click', () => {
             if (video.paused) {
                 video.play();
                 audio.play();
@@ -114,13 +122,6 @@
                 audio.pause();
                 pauseButton.innerText = 'Play';
             }
-        });
-        
-        redirectButton.id = 'redirect-btn';
-        redirectButton.innerText = 'my guns.lol';
-        document.body.appendChild(redirectButton);
-        redirectButton.addEventListener('click', () => {
-            window.open('https://guns.lol/slipzy', '_blank'); 
         });
 
         button.addEventListener('click', () => {
