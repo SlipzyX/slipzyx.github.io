@@ -153,17 +153,15 @@
         <button class="nav-btn" onclick="window.location.href='https://me.nekos.ca'">nekos.ca</button>
         <button class="nav-btn" onclick="window.location.href='https://guns.lol/slipzy'">guns.lol</button>
         <button class="nav-btn" onclick="window.location.href='https://github.com/slipzyx'">GitHub</button>
-        <img src="Thumbnails/thumb1.jpg" class="bg-thumbnail" onclick="changeBackground('Backgrounds/background1.mp4', 'audios/audio1.mp3')">
-        <img src="Thumbnails/thumb2.jpg" class="bg-thumbnail" onclick="changeBackground('Backgrounds/background2.mp4', 'audios/audio2.mp3')"> 
-        <img src="Thumbnails/thumb3.jpg" class="bg-thumbnail" onclick="changeBackground('Backgrounds/background3.mp4', 'audios/audio3.mp3')">
+        <img src="thumbnails/thumb1.jpg" class="bg-thumbnail" onclick="changeBackground('backgrounds/background1.mp4', 'audios/audio1.mp3')">
+        <img src="thumbnails/thumb2.jpg" class="bg-thumbnail" onclick="changeBackground('backgrounds/background2.mp4', 'audios/audio2.mp3')"> 
+        <img src="thumbnails/thumb3.jpg" class="bg-thumbnail" onclick="changeBackground('backgrounds/background3.mp4', 'audios/audio3.mp3')">
     </div>
     <div id="overlay">
         <button id="enter-btn">Enter Site</button>
     </div>
     <video id="background-video" src="backgrounds/background1.mp4" muted loop></video>
     <audio id="background-audio" src="audios/audio1.mp3" loop></audio>
-    <audio id="background-audio2" src="audios/audio2.mp3" loop></audio>
-    <audio id="background-audio3" src="audios/audio3.mp3" loop></audio>
     <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
     <button id="pause-btn">||</button>
     <script>
