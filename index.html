@@ -179,11 +179,16 @@
                 if (overlay.style.display === 'none') {
                     video.oncanplay = () => {
                         video.play().catch(() => {});
-                        pauseButton.innerText = '||';
+                        if (pauseButton.innerText === '▷') {
+                            video.pause().catch(() => {});
+                        }
                         video.oncanplay = null;
                     };
                     audio.oncanplay = () => {
                         audio.play().catch(() => {});
+                        if (pauseButton.innerText === '▷') {
+                            audio.pause().catch(() => {});
+                        }                        
                         audio.oncanplay = null;
                     };
                 }
