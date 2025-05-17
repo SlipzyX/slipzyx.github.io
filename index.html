@@ -51,6 +51,13 @@
             color: black;
         }
 
+        .bg-thumbnail {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         #background-video {
             position: absolute;
             top: 0;
@@ -60,7 +67,6 @@
             object-fit: cover;
             z-index: -1;
         }
-
 
         #overlay {
             position: absolute;
@@ -76,17 +82,6 @@
             background: rgba(0, 0, 0, 0.5);
         }
 
-
-        #enter-btn {
-            font-size: 24px;
-            color: white;
-            background: none;
-            background-color: none;
-            border: none;
-            cursor: pointer;
-        }
-
-
         #volume-slider {
             position: absolute;
             bottom: 20px;
@@ -101,19 +96,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        #redirect-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
         #pause-btn {
             position: fixed;
             bottom: 20px;
@@ -125,18 +107,44 @@
             border-radius: 10px;
             cursor: pointer;
         }
-
         #pause-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        #pause-btn:active {
             background: rgba(255, 255, 255, 0.5);
+            color: black;
         }
-        #pause-btn:focus {
+        #enter-btn {
+            background: rgba(255, 255, 255, 0.5);
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        #enter-btn:hover {
+            background: rgba(255, 255, 255, 0.7);
+            color: black;
+        }
+        #enter-btn:active {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+        }
+        #enter-btn:focus {
             outline: none;
         }
-
-
+        #enter-btn:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+        #enter-btn:focus:not(:focus-visible) {
+            outline: none;
+        }
+        #enter-btn:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+        #enter-btn:focus:not(:focus-visible) {
+            outline: none;
+        }
 
     </style>
 </head>
@@ -145,16 +153,29 @@
         <button class="nav-btn" onclick="window.location.href='https://me.nekos.ca'">nekos.ca</button>
         <button class="nav-btn" onclick="window.location.href='https://guns.lol/slipzy'">guns.lol</button>
         <button class="nav-btn" onclick="window.location.href='https://github.com/slipzyx'">GitHub</button>
-
+        <img src="thumb1.jpg" class="bg-thumbnail" onclick="changeBackground('background1.mp4', 'audio1.mp3')">
+        <img src="thumb2.jpg" class="bg-thumbnail" onclick="changeBackground('background2.mp4', 'audio2.mp3')"> 
+        <img src="thumb3.jpg" class="bg-thumbnail" onclick="changeBackground('background3.mp4', 'audio3.mp3')">
     </div>
     <div id="overlay">
         <button id="enter-btn">Enter Site</button>
     </div>
-    <video id="background-video" src="background.mp4" muted loop></video>
-    <audio id="background-audio" src="audio.mp3" loop></audio>
+    <video id="background-video" src="background1.mp4" muted loop></video>
+    <audio id="background-audio" src="audio1.mp3" loop></audio>
+    <audio id="background-audio2" src="audio2.mp3" loop></audio>
+    <audio id="background-audio3" src="audio3.mp3" loop></audio>
     <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
     <button id="pause-btn">||</button>
     <script>
+        function changeBackground(videoSrc, audioSrc) {
+            const video = document.getElementById('background-video');
+            const audio = document.getElementById('background-audio');
+            video.src = videoSrc;
+            audio.src = audioSrc;
+            video.play();
+            audio.play();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const video = document.getElementById('background-video');
             const audio = document.getElementById('background-audio');
@@ -190,7 +211,6 @@
             audio.load();
             audio.volume = volumeSlider.value;
             video.volume = volumeSlider.value;
-
             video.pause();
             audio.pause();
         });
