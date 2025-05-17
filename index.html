@@ -17,6 +17,38 @@
             height: 100%;
             overflow: hidden;
             font-family: Arial, sans-serif;
+            background: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            color: white;
+            background: transparent;
+            border: 1px solid white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: white;
+            color: black;
         }
 
         #background-video {
@@ -28,6 +60,7 @@
             object-fit: cover;
             z-index: -1;
         }
+
 
         #overlay {
             position: absolute;
@@ -43,6 +76,7 @@
             background: rgba(0, 0, 0, 0.5);
         }
 
+
         #enter-btn {
             font-size: 24px;
             color: white;
@@ -51,6 +85,7 @@
             border: none;
             cursor: pointer;
         }
+
 
         #volume-slider {
             position: absolute;
@@ -66,18 +101,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        #pause-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            padding: 5px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
         #redirect-btn {
             position: fixed;
             top: 20px;
@@ -91,60 +114,85 @@
             cursor: pointer;
         }
 
+        #pause-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #pause-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        #pause-btn:active {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        #pause-btn:focus {
+            outline: none;
+        }
+        
+
+
     </style>
 </head>
 <body>
+    <div id="nav-bar">
+        <button class="nav-btn" onclick="window.location.href='https://nekos.ca'">nekos.ca</button>
+        <button class="nav-btn" onclick="window.location.href='https://guns.lol/slipzy'">guns.lol</button>
+        <button class="nav-btn" onclick="window.location.href='https://github.com/slipzyx'">GitHub</button>
+    </div>
     <div id="overlay">
-        <button id="enter-btn">Click Me ^_^</button>
+        <button id="enter-btn">Enter Site</button>
     </div>
     <video id="background-video" src="background.mp4" muted loop></video>
     <audio id="background-audio" src="audio.mp3" loop></audio>
-    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
     <button id="pause-btn">||</button>
     <script>
-        const video = document.getElementById('background-video');
-        const audio = document.getElementById('background-audio');
-        const overlay = document.getElementById('overlay');
-        const button = document.getElementById('enter-btn');
-        const volumeSlider = document.getElementById('volume-slider');
-        const pauseButton = document.getElementById('pause-btn');
-        const redirectButton = document.createElement('button');
-        redirectButton.id = 'redirect-btn';
-        redirectButton.innerText = 'my guns.lol';
-        document.body.appendChild(redirectButton);
-        redirectButton.addEventListener('click', () => {
-            window.open('https://guns.lol/slipzy', '_blank'); 
-        });
-        
-        
-        
-        pauseButton.addEventListener('click', () => {
-            if (video.paused) {
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('background-video');
+            const audio = document.getElementById('background-audio');
+            const overlay = document.getElementById('overlay');
+            const button = document.getElementById('enter-btn');
+            const volumeSlider = document.getElementById('volume-slider');
+            const pauseButton = document.getElementById('pause-btn');
+
+            pauseButton.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    audio.play();
+                    pauseButton.innerText = '||';
+                } else {
+                    video.pause();
+                    audio.pause();
+                    pauseButton.innerText = '▷';
+                }
+            });
+
+            button.addEventListener('click', () => {
+                overlay.style.display = 'none';
                 video.play();
                 audio.play();
-                pauseButton.innerText = '||';
-            } else {
-                video.pause();
-                audio.pause();
-                pauseButton.innerText = '▷';
-            }
-        });
+            });
 
-        button.addEventListener('click', () => {
-            overlay.style.display = 'none';
-            // setTimeout(() => {
-            video.play();
-            audio.play();
-            // }, 500);
-        });
+            volumeSlider.addEventListener('input', (event) => {
+                audio.volume = volumeSlider.value;
+                video.volume = volumeSlider.value;
+            });
 
-        volumeSlider.addEventListener('input', (event) => {
+            video.load();
+            audio.load();
             audio.volume = volumeSlider.value;
             video.volume = volumeSlider.value;
-        });
 
-        video.pause();
-        audio.pause();
+            video.pause();
+            audio.pause();
+        });
     </script>
 </body>
 </html>
