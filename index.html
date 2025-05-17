@@ -166,13 +166,15 @@
             const overlay = document.getElementById('overlay');
             video.classList.add('slide-up');
             setTimeout(() => {
+                video.pause();
+                audio.pause();
                 video.src = videoSrc;
                 audio.src = audioSrc;
                 video.load();
                 audio.load();
                 video.classList.remove('slide-up');
+                // Only try to play if overlay is hidden (site entered)
                 if (overlay.style.display === 'none') {
-                    // Ensure media is loaded before playing
                     video.oncanplay = () => {
                         video.play().catch(() => {});
                         video.oncanplay = null;
@@ -214,12 +216,12 @@
             });
             volumeSlider.addEventListener('input', (event) => {
                 audio.volume = parseFloat(volumeSlider.value);
-                video.volume = parseFloat(volumeSlider.value);
+                // video.volume is not set because video element may not support volume if muted or no audio track
             });
 
             video.load();
             audio.volume = parseFloat(volumeSlider.value);
-            video.volume = parseFloat(volumeSlider.value);
+            // video.volume is not set because video element may not support volume if muted or no audio track
             video.pause();
             audio.pause();
         });
