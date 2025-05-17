@@ -69,6 +69,10 @@
             z-index: -1;
         }
 
+        .slide-up {
+            transform: translateY(-100%);
+        }
+
         #overlay {
             position: absolute;
             top: 0;
@@ -89,9 +93,6 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 10px;
             padding: 5px;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.2);
@@ -139,13 +140,6 @@
         #enter-btn:focus:not(:focus-visible) {
             outline: none;
         }
-        #enter-btn:focus-visible {
-            outline: 2px solid white;
-            outline-offset: 2px;
-        }
-        #enter-btn:focus:not(:focus-visible) {
-            outline: none;
-        }
 
     </style>
 </head>
@@ -169,10 +163,26 @@
         function changeBackground(videoSrc, audioSrc) {
             const video = document.getElementById('background-video');
             const audio = document.getElementById('background-audio');
-            video.src = videoSrc;
-            audio.src = audioSrc;
-            video.play();
-            audio.play();
+            const overlay = document.getElementById('overlay');
+            video.classList.add('slide-up');
+            setTimeout(() => {
+                video.src = videoSrc;
+                audio.src = audioSrc;
+                video.load();
+                audio.load();
+                video.classList.remove('slide-up');
+                if (overlay.style.display === 'none') {
+                    // Ensure media is loaded before playing
+                    video.oncanplay = () => {
+                        video.play().catch(() => {});
+                        video.oncanplay = null;
+                    };
+                    audio.oncanplay = () => {
+                        audio.play().catch(() => {});
+                        audio.oncanplay = null;
+                    };
+                }
+            }, 200); // Adjust the timeout to match your CSS transition duration
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -197,19 +207,19 @@
 
             button.addEventListener('click', () => {
                 overlay.style.display = 'none';
-                video.play();
-                audio.play();
+                video.muted = false;
+                // Play video and audio only after user interaction to avoid autoplay issues
+                video.play().catch(() => {});
+                audio.play().catch(() => {});
             });
-
             volumeSlider.addEventListener('input', (event) => {
-                audio.volume = volumeSlider.value;
-                video.volume = volumeSlider.value;
+                audio.volume = parseFloat(volumeSlider.value);
+                video.volume = parseFloat(volumeSlider.value);
             });
 
             video.load();
-            audio.load();
-            audio.volume = volumeSlider.value;
-            video.volume = volumeSlider.value;
+            audio.volume = parseFloat(volumeSlider.value);
+            video.volume = parseFloat(volumeSlider.value);
             video.pause();
             audio.pause();
         });
