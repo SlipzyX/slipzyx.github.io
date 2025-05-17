@@ -71,6 +71,7 @@
 
         .slide-up {
             transform: translateY(-100%);
+            transition: transform 0.2s ease-in-out;
         }
 
         #overlay {
@@ -164,6 +165,7 @@
             const video = document.getElementById('background-video');
             const audio = document.getElementById('background-audio');
             const overlay = document.getElementById('overlay');
+            const pauseButton = document.getElementById('pause-btn');
             video.classList.add('slide-up');
             setTimeout(() => {
                 video.pause();
@@ -173,10 +175,11 @@
                 video.load();
                 audio.load();
                 video.classList.remove('slide-up');
-                // Only try to play if overlay is hidden (site entered)
+
                 if (overlay.style.display === 'none') {
                     video.oncanplay = () => {
                         video.play().catch(() => {});
+                        pauseButton.innerText = '||';
                         video.oncanplay = null;
                     };
                     audio.oncanplay = () => {
@@ -184,18 +187,20 @@
                         audio.oncanplay = null;
                     };
                 }
-            }, 200); // Adjust the timeout to match your CSS transition duration
+            }, 200);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById('background-video');
-            const audio = document.getElementById('background-audio');
+            let video = document.getElementById('background-video');
+            let audio = document.getElementById('background-audio');
             const overlay = document.getElementById('overlay');
             const button = document.getElementById('enter-btn');
             const volumeSlider = document.getElementById('volume-slider');
             const pauseButton = document.getElementById('pause-btn');
 
             pauseButton.addEventListener('click', () => {
+                video = document.getElementById('background-video');
+                audio = document.getElementById('background-audio');
                 if (video.paused) {
                     video.play();
                     audio.play();
@@ -208,20 +213,22 @@
             });
 
             button.addEventListener('click', () => {
+                video = document.getElementById('background-video');
+                audio = document.getElementById('background-audio');
                 overlay.style.display = 'none';
                 video.muted = false;
-                // Play video and audio only after user interaction to avoid autoplay issues
+
                 video.play().catch(() => {});
                 audio.play().catch(() => {});
             });
             volumeSlider.addEventListener('input', (event) => {
                 audio.volume = parseFloat(volumeSlider.value);
-                // video.volume is not set because video element may not support volume if muted or no audio track
+
             });
 
             video.load();
             audio.volume = parseFloat(volumeSlider.value);
-            // video.volume is not set because video element may not support volume if muted or no audio track
+
             video.pause();
             audio.pause();
         });
