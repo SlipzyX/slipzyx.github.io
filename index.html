@@ -178,6 +178,7 @@
 
                 if (overlay.style.display === 'none') {
                     video.oncanplay = () => {
+                        video.muted = true;
                         video.play().catch(() => {});
                         if (pauseButton.innerText === '▷') {
                             video.pause().catch(() => {});
