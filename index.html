@@ -67,11 +67,22 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            transition: transform 0.2s ease-in-out;
         }
 
-        .slide-up {
+        #video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+            z-index: -2;
+        }
+
+        #background-video.slide-up { 
             transform: translateY(-100%);
-            transition: transform 0.2s ease-in-out;
         }
 
         #overlay {
@@ -156,7 +167,13 @@
     <div id="overlay">
         <button id="enter-btn">Enter Site</button>
     </div>
-    <video id="background-video" src="backgrounds/background1.mp4" muted loop></video>
+    <div id="video-container">
+        <video id="background-video"
+            src="backgrounds/background1.mp4"
+            muted loop
+            style="width:100%; height:100%; object-fit:cover;">
+    </video>
+    </div>
     <audio id="background-audio" src="audios/audio1.mp3" loop></audio>
     <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
     <button id="pause-btn">||</button>
