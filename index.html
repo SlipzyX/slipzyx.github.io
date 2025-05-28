@@ -263,5 +263,14 @@
             audio.pause();
         });
     </script>
-</body>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space' || event.key === ' ') {
+                event.preventDefault();
+                const pauseButton = document.getElementById('pause-btn');
+                pauseButton.click();
+            }
+        });
+        </script>
+    </body>
 </html>
