@@ -246,7 +246,7 @@
                 video = document.getElementById('background-video');
                 audio = document.getElementById('background-audio');
                 overlay.style.display = 'none';
-                video.muted = false;
+                video.muted = true;
 
                 video.play().catch(() => {});
                 audio.play().catch(() => {});
