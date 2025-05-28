@@ -152,14 +152,16 @@
         #enter-btn:focus:not(:focus-visible) {
             outline: none;
         }
+    
+
 
     </style>
 </head>
 <body>
     <div id="nav-bar">
-        <button class="nav-btn" onclick="window.location.href='https://me.nekos.ca'">nekos.ca</button>
-        <button class="nav-btn" onclick="window.location.href='https://guns.lol/slipzy'">guns.lol</button>
-        <button class="nav-btn" onclick="window.location.href='https://github.com/slipzyx'">GitHub</button>
+            <a class="nav-btn" href="https://me.nekos.ca" target="_blank">nekos.ca</a>
+            <a class="nav-btn" href="https://guns.lol/slipzy" target="_blank">guns.lol</a>
+            <a class="nav-btn" href="https://github.com/slipzyx" target="_blank">GitHub</a>  
         <img src="Thumbnails/thumb1.jpg" class="bg-thumbnail" onclick="changeBackground('backgrounds/background1.mp4', 'audios/audio1.mp3')">
         <img src="Thumbnails/thumb2.jpg" class="bg-thumbnail" onclick="changeBackground('backgrounds/background2.mp4', 'audios/audio2.mp3')"> 
         <img src="Thumbnails/thumb3.jpg" class="bg-thumbnail" onclick="changeBackground('backgrounds/background3.mp4', 'audios/audio3.mp3')">
@@ -174,7 +176,12 @@
             style="width:100%; height:100%; object-fit:cover;">
     </video>
     </div>
-    <audio id="background-audio" src="audios/audio1.mp3" loop></audio>
+        <div id="audio-container">
+        <audio id="background-audio"
+        src="audios/audio1.mp3" loop>
+        </audio>
+
+
     <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
     <button id="pause-btn">||</button>
     <script>
