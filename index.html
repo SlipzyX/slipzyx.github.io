@@ -52,7 +52,28 @@
             color: black;
         }
 
+        .typing h1 {
+        overflow: hidden;
+        border-right: .15em solid black;
+        white-space: nowrap;
+        margin: 0 auto;
+        letter-spacing: .2em;
+        animation:
+        typing 2s steps(20, end),
+        blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: black; }
+        }
+    
     </style>
+
 </head>
 <body>
     
@@ -62,20 +83,9 @@
             <a class="nav-btn" href="https://slipzyx.github.io/media.html">Media Site</a>  
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <div class="typing">
+        <h1>‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  Hi, I'm Slipzy.</h1>
+        <h1>Welcome to my Project.</h1>
+        <h1>‎ ‎ ‎ ‎P.S I'm shit at coding.</h1>
+    </div>
 </head>
-
