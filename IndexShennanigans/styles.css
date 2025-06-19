@@ -7,9 +7,9 @@
             overflow: hidden;
             font-family: Arial, sans-serif;
             background: black;
+            align-items: center;
             color: white;
             display: flex;
-            align-items: center;
             justify-content: center;
             position: relative;
         }
