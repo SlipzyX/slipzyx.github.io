@@ -47,6 +47,10 @@
         white-space: nowrap;
         margin: 0 auto;
         letter-spacing: .2em;
+        text-align: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
         animation:
         typing 1.5s steps(20, end),
         blink-caret .75s step-end infinite;
