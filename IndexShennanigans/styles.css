@@ -43,7 +43,7 @@
 
         .typing h1 {
         overflow: hidden;
-        border-right: .15em solid white;
+        border-right: .15em solid transparent;
         white-space: nowrap;
         margin: 0 auto;
         letter-spacing: .2em;
@@ -58,6 +58,6 @@
         }
         @keyframes blink-caret {
             from, to { border-color: transparent; }
-            50% { border-color: white; }
+            50% { border-color: transparent; }
         }
     
